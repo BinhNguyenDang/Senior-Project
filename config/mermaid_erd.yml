@@ -1,0 +1,3 @@
+# result path
+# default is 'mermaid_erd/index.html'
+result_path: public/erd/index.html

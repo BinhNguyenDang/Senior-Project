@@ -1,0 +1,43 @@
+<div class="container bootstrap snippets bootdey mt-4" style= "background: white">
+<div class="row">
+  <div class="profile-nav col-md-3 mt-4">
+      <div class="panel">
+          <div class="user-heading">
+              <a href="#">
+                  <%= image_tag(@user.avatar_thumbnail, class: "rounded-circle mr-3") %>
+              </a>
+              <h1><%= link_to @user.username, @user, class: "msg-role-#{@user.role}", style: "font-weight: bold;"%></h1>
+              <p><%= link_to @user.email, @user , class: "text-white"%></p>
+              <%= link_to "Main Chatroom", rooms_path, class: "btn btn-primary mr-2" %>
+          </div>
+      </div>
+  </div>
+  <div class="profile-info col-md-9 mt-4">
+      <div class="panel">
+          <div class="bio-graph-heading mt-4">
+          </div>
+          <div class="panel-body bio-graph-info">
+              <h1>Profile:</h1>
+              <div class="row">
+                  <div class="bio-row">
+                      <p><span>First Name </span>: <%= @user.firstname %></p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Last Name </span>: <%= @user.lastname %></p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Birthday</span>: <%= @user.birthday %></p>
+                  </div>
+                  <div class="bio-row">
+                      <p><span>Email </span>: <%= @user.email %></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div>
+      </div>
+  </div>
+  <h4>Daily Messages</h4>
+  <div id="chart"><%= area_chart(@dashboard) %></div>
+</div>
+</div>

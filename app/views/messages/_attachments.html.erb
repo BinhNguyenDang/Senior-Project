@@ -1,0 +1,43 @@
+<% if message.attachments.attached? %>
+  <div class="row">
+    <% message.attachments.each_with_index do |attachment, index| %>
+      <div class="col-12">
+        <% if attachment.image? %>
+          <!-- Image with Modal Trigger -->
+          <div class="message-image-container">
+            <%= link_to "#imageModal#{message.id}#{index}", data: { bs_toggle: "modal" } do %>
+              <%= image_tag(message.chat_attachment(index), class: "message-image") %>
+            <% end %>
+          </div>
+          
+          <!-- Modal Structure -->
+          <div class="modal fade" id="imageModal<%= message.id %><%= index %>" tabindex="-1" aria-labelledby="imageModalLabel<%= index %>" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <%= image_tag(attachment, class: "img-fluid") %>
+                </div>
+                <div class="modal-footer">
+                   <!-- Download Button -->
+                  <%= link_to rails_blob_url(attachment, disposition: "attachment"), class: "btn btn-primary" do %>
+                    Download
+                  <% end %>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% elsif attachment.video? %>
+          <!-- Video Attachment -->
+          <%= video_tag(url_for(attachment), class: 'message-video', controls: true) %>
+        <% elsif attachment.audio? %>
+          <!-- Audio Attachment -->
+          <%= audio_tag(url_for(attachment), class: 'message-audio', controls: true) %>
+        <% else %>
+          <!-- Other File Types -->
+          <%= link_to attachment.filename, url_for(attachment), class: 'message-file' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

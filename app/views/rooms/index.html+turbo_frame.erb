@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "page_handler" do %>
+  <%= turbo_stream_action_tag(
+    "prepend", # Prepend new content to the target
+    target: "messages-container", # Target container to prepend content to
+    template: %(#{render @messages}) # Render the messages and prepend them to the target
+    ) %>
+  <%= turbo_stream_action_tag(
+    "replace", # Replace existing content in the target
+    target: "pager", # Target container to replace content in
+    template: %(#{render "messages/pager", pagy: @pagy}) # Render the pager and replace the content in the target
+    ) %>
+<% end %>

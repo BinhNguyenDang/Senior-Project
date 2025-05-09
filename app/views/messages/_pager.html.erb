@@ -1,0 +1,16 @@
+<div id="pager" class="text-center">
+  <!-- If there is another page -->
+  <% if pagy.next %>
+    <!-- Dynamically generates the URL for the next page of messages. -->
+    <!-- Specify the Turbo Frame to update -->
+    <!-- Specify the controller for handling the click event -->
+    <!-- autoclick is a stimulus controller -->
+    <%= link_to("Load More Messages", 
+        url_for(page: pagy.next),
+        class: "btn btn-primary",
+        data: {
+            turbo_frame: "page_handler", 
+            controller: "autoclick"   
+        }) %>
+  <% end %>
+</div>

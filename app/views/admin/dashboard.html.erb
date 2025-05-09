@@ -1,0 +1,20 @@
+<div class="container mt-5 admin-container">
+  <h1 class="admin-heading animate__animated animate__bounceIn animate__animated-hidden">Admin</h1>
+  <h3 class="admin-subheading animate__animated animate__fadeInLeft animate__animated-hidden">Daily Messages</h3>
+  <h4 class="admin-subheading animate__animated animate__fadeInRight animate__animated-hidden">Area Chart</h4>
+  <div class="admin-chart animate__animated animate__zoomIn animate__animated-hidden">
+    <%= area_chart(@messages) %>
+  </div>
+  <h4 class="admin-subheading animate__animated animate__fadeInLeft animate__animated-hidden">Bar Chart</h4>
+  <div class="admin-chart animate__animated animate__zoomIn animate__animated-hidden">
+    <%= bar_chart(@messages) %>
+  </div>
+  <h4 class="admin-subheading animate__animated animate__fadeInRight animate__animated-hidden">Column Chart</h4>
+  <div class="admin-chart animate__animated animate__zoomIn animate__animated-hidden">
+    <%= column_chart(@messages) %>
+  </div>
+  <h4 class="admin-subheading animate__animated animate__fadeInLeft animate__animated-hidden">Donut Chart</h4>
+  <div class="admin-chart animate__animated animate__zoomIn animate__animated-hidden">
+    <%= pie_chart(@messages) %>
+  </div>
+</div>

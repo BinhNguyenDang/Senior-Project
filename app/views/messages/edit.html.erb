@@ -1,0 +1,31 @@
+<div class="container my-5" style="max-height: 80vh; overflow-y: auto; background: white;">    
+    <h2>Edit Message</h2>
+    <%= form_with model: [@room, @message], local: true do |form| %>
+    <div class="field">
+        <%= form.label :body, class: "form-label" %>
+        <%= form.text_area :body, class: "form-control" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :attachments, class: "form-label" %>
+        <%= form.file_field :attachments, multiple: true, direct_upload: true %>
+    </div>
+    <% if @message.attachments.attached? %>
+        <h4>Current Attachments:</h4>
+        <% @message.attachments.each_with_index do |attachment, index| %>
+            <div class="field">
+            <% if attachment.content_type.start_with?('image/') %>
+                <%= image_tag attachment, class: "img-thumbnail" %>
+            <% end %>
+            <%= link_to attachment.filename.to_s, rails_blob_path(attachment, disposition: "attachment") %>
+            <%= check_box_tag "message[remove_attachments][]", attachment.id %>
+            <%= label_tag "Remove #{attachment.filename}" %>
+            </div>
+        <% end %>
+    <% end %>
+
+    <%= form.submit "Update Message", class: "btn btn-primary" %>
+    <% end %>
+
+    <%= link_to 'Cancel', @room, class: "btn btn-secondary" %>
+</div>

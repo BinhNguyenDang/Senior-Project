@@ -1,0 +1,35 @@
+<div class="container" id="home-container" style="display: flex; background: black;">
+  <div class="col-8">
+    <div class="p-5 mt-4 mb-4 bg-dark border rounded-3 text-center text-white" id="jumbotron" style="flex: 3;">
+      <h1 class="display-4">TurboChat</h1>
+      <p> There are <strong><%= pluralize(@online_users, "User") %></strong> Online. </p>
+      <% if current_user %>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+          <%= image_tag(current_user.avatar_thumbnail, class: "rounded-circle mr-3", style: "width: 50px; height: 50px;") %>
+          <span class="lead">Welcome, <%= current_user.email %></span>
+        </div>
+        <table>
+        <tr><%= link_to "Start Chatting", rooms_path, class: "btn btn-primary mr-2" %><tr>
+        <tr><%= link_to "Edit Account", edit_user_registration_path, class: "btn btn-secondary mr-2" %><tr>
+        <tr><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger" %><tr>
+        </table>
+      <% else %>
+        <p class="lead">Seamless communication is the backbone of modern relationships. Our chat app provides a seamless platform for you to connect with friends, family, and colleagues instantly. Whether you're catching up with loved ones, collaborating on projects, or simply enjoying casual conversations, our app offers a user-friendly interface that keeps you connected anytime, anywhere.</p>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-light" %>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light" %>
+      <% end %>
+    </div>
+    <div class="p-5 mt-4 mb-4 bg-black border rounded-3 text-center text-white" id="filler" style="background: black" >
+      <h1 class="display-6">Contact Us</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 30px;">Have questions or feedback? We'd love to hear from you. Reach out to us anytime!</p>
+        <a href="https://github.com/BinhNguyenDang/Demo-Turbochat">Source code</a>
+    </div>
+  </div>
+  <div class="col-4 m-4" id="public_messages" style="overflow-x: hidden; overflow-y: auto; max-height: 80vh; padding: 0px; flex: 1;">
+    <h4 class="text-white" style="font-weight: 300;">Latest Public Messages</h4>
+    <%= turbo_stream_from "public_messages"%>
+    <% @messages.each do |message| %>
+        <%= render "messages/message_preview", message: message %>
+    <% end %>
+  </div>
+</div>

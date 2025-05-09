@@ -1,0 +1,10 @@
+<% if message.owned_by_current_user? %>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <%= link_to edit_room_message_path(message.room, message), class: "btn btn" do %>
+      <i class="bi bi-pen"></i> Edit
+    <% end %>
+    <%= button_to room_message_path(message.room, message), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn" do %>
+      <i class="bi bi-trash"></i> Delete
+    <% end %>
+  </div>
+<% end %>

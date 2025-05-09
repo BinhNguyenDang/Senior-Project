@@ -1,0 +1,6 @@
+<% unread_count = room.unread_notifications_count_for_user(user) %>
+<% if unread_count > 0 %>
+  <div class="unread-count">
+    <%= unread_count %> unread notification(s)
+  </div>
+<% end %>

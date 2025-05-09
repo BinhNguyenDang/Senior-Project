@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible' content="'IE=edge">
+    <title>PeerChat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'video', media: 'screen' %>
+</head>
+<body>
+    <% if @room && @room.participant?(@room, @user) %> 
+        <div id="videos">
+            <video class="video-player" id="user-1" autoplay playsinline></video>
+            <video class="video-player" id="user-2" autoplay playsinline></video>
+        </div>
+        <div id="controls">
+            <div class="control-container" id="camera-btn">
+                <%= image_tag("camera.png") %>
+            </div>
+            <div class="control-container" id="mic-btn">
+                <%= image_tag("mic.png") %>
+            </div>
+            <a href="<%= room_path %>" onclick="reloadPage(event)">
+                <div class="control-container" id="leave-btn">
+                    <%= image_tag("phone.png")  %>
+                </div>
+            </a>
+        </div>
+        <script>
+            window.userId = "<%= @user.id %>";
+            window.roomId = "<%= @room.id %>";
+            window.app_id = "<%= Rails.application.credentials.APP_ID%>";
+            function reloadPage(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                var targetUrl = event.currentTarget.href;
+
+                window.location.href = targetUrl;
+
+                // Check periodically if the page has changed, and then reload
+                var checkPageChange = setInterval(function() {
+                    if (window.location.href === targetUrl) {
+                        clearInterval(checkPageChange);
+                        window.location.reload();
+                    }
+                }, 100); // Check every 100 milliseconds
+            }
+        </script>
+    <% else %>
+        <a href="<%= rooms_path %>"></a>
+        <%= flash[:notice] = "You're not a participant of this room"%>
+    <% end %>
+</body>
+<%= javascript_include_tag 'agora-rtm-sdk-1.5.1', defer: true %>
+<%= javascript_include_tag 'video.js', defer: true %>
+
+ 
+</html>

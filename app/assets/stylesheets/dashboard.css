@@ -1,0 +1,149 @@
+/* admin.css */
+
+/* Container */
+.admin-container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+  }
+  
+  /* Headings */
+  .admin-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: bounceInAnimation 1s forwards;
+    animation-delay: 1s;
+  }
+  
+  .admin-subheading {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    opacity: 0;
+  }
+  
+  .admin-subheading:nth-child(2) {
+    transform: translateX(-50px);
+    animation: fadeInLeftAnimation 1s forwards;
+    animation-delay: 1.5s;
+  }
+  
+  .admin-subheading:nth-child(3),
+  .admin-subheading:nth-child(5),
+  .admin-subheading:nth-child(7) {
+    text-align: center;
+    transform: translateX(50px);
+    animation: fadeInRightAnimation 1s forwards;
+    animation-delay: 2s;
+  }
+  
+  /* Charts */
+  .admin-chart {
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: zoomInAnimation 1s forwards;
+    animation-delay: 2.5s;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bounceInAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.1) translateY(-50px);
+    }
+    60% {
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  @keyframes fadeInLeftAnimation {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInRightAnimation {
+    0% {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes zoomInAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Initially hide elements */
+  .animate__animated-hidden {
+    opacity: 0;
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Toggled Chart Colors */
+  .admin-chart.toggled {
+    filter: hue-rotate(180deg);
+    transition: filter 0.3s ease;
+  }
+
+  #users-container {
+    max-height: 200px; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+  }
+
+  #rooms-container {
+    max-height: 230px; 
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
